@@ -1,0 +1,42 @@
+#include "Student.h"
+#include <sstream>
+
+Student::Student(int perm1, 
+		 std::string lastName1, 
+		 std::string firstAndMiddleNames1) {
+  perm = perm1;
+  lastName = lastName1;
+  firstAndMiddleNames = firstAndMiddleNames1;
+  
+}
+
+int Student::getPerm() const { 
+  return perm;
+}
+
+std::string Student::getLastName() const { 
+  return lastName;
+}
+
+std::string Student::getFirstAndMiddleNames() const { 
+  return firstAndMiddleNames;
+}
+
+std::string Student::getFullName() const { 
+  return firstAndMiddleNames+ " "+ lastName;
+   
+}
+
+std::string Student::toString() const { 
+  // e.g. [12345,Smith,Malory Logan]
+   std::ostringstream oss;
+  
+  oss << "[" 
+      << this->getPerm() << ","
+      << this->getLastName() << ","
+      << this->getFirstAndMiddleNames() << "]";
+      return oss.str();
+}
+  
+  
+

@@ -1,0 +1,108 @@
+#ifndef WORDCOUNTHELPER_H
+#define WORDCOUNTHELPER_H
+
+#include <iostream>
+#include <string>
+#include <stdio.h>
+#include <vector>
+
+class WordCountHelper {
+ public:
+  
+
+ 
+  
+  int getNumWords() const; // returns number of words in vocabulary
+ 
+
+ 
+  int incrWordCount(std::string word); // if word not in vocabulary, add it.
+  // then increment occurence count for that word and return the count
+
+  // overloaded version that can take a C-string  
+ 
+
+  int incrWordCount(const char * const word) {
+    return incrWordCount(std::string(word));
+  }
+  
+ 
+
+  int getWordCount(std::string word) const;
+  // if word does not exist in vocabulary, return 0, otherwise return count.
+
+  // overloaded version that can take a C-string  
+  
+
+int getWordCount(const char * const word) {
+    return getWordCount(std::string(word));
+  }
+  
+ void dumpWordsSortedByWord(std::ostream &out) const;
+  // dump each word,count pair as CSV to std::ostream, sorted by word
+
+ void dumpWordsSortedByOccurence(std::ostream &out) const;
+  // dump each word,count as CSV to std::ostream, sorted decreasing by occurence
+
+ 
+
+ void addAllWords(std::string text);
+  // parse out text into individual words, and add each word
+
+ 
+
+ static bool isWordChar(char c);
+
+ 
+
+ static std::string stripWord(std::string word);
+
+  
+  class count{
+  public:
+    count(){
+      i = 0;
+      word = "";
+    }
+  count(const std::string &word): i(1), word(word){}
+    
+    int getCount() const{
+      return i;
+    }
+    
+    std::string getWord() const{
+      return word;
+    }
+    
+    int incr(){
+      i++;
+      return i;
+    }
+    
+    static bool  sortInts(const count& c1, const count& c2) {
+      if(c2.i == c1.i)
+	{
+	  return sortWords(c1,c2);
+	}
+      return(c2.i < c1.i);
+    }
+
+    static bool  sortWords(const count& c1, const count& c2) {
+      return(c1.getWord() < c2.getWord());
+    }
+
+  private:
+    int i;
+    std::string word;
+  };
+
+ 
+  private:
+   std::vector<count> wordList;
+   
+
+};
+
+
+
+#endif // WORDCOUNTHELPER_H
